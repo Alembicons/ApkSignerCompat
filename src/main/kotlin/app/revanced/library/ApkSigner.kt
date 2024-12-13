@@ -14,15 +14,12 @@ import java.math.BigInteger
 import java.security.*
 import java.security.cert.X509Certificate
 import java.util.*
-import java.util.logging.Logger
 
 /**
  * Utility class for reading or writing keystore files and entries as well as signing APK files.
  */
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 object ApkSigner {
-    private val logger = Logger.getLogger(ApkSigner::class.java.name)
-
     init {
         if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
             Security.addProvider(BouncyCastleProvider())
@@ -42,8 +39,6 @@ object ApkSigner {
      * @see KeyStore
      */
     fun newKeyStore(entries: Set<KeyStoreEntry>): KeyStore {
-        logger.fine("Creating keystore")
-
         return newKeyStoreInstance().apply {
             load(null)
 
@@ -75,8 +70,6 @@ object ApkSigner {
         keyStoreInputStream: InputStream,
         keyStorePassword: String?,
     ): KeyStore {
-        logger.fine("Reading keystore")
-
         return newKeyStoreInstance().apply {
             try {
                 load(keyStoreInputStream, keyStorePassword?.toCharArray())
@@ -104,8 +97,6 @@ object ApkSigner {
         commonName: String,
         validUntil: Date,
     ): PrivateKeyCertificatePair {
-        logger.fine("Creating certificate for $commonName")
-
         // Generate a new key pair.
         val keyPair = KeyPairGenerator.getInstance("RSA").apply {
             initialize(4096)
@@ -147,8 +138,6 @@ object ApkSigner {
         keyStoreEntryAlias: String,
         keyStoreEntryPassword: String,
     ): PrivateKeyCertificatePair {
-        logger.fine("Reading key and certificate pair from keystore entry $keyStoreEntryAlias")
-
         if (!keyStore.containsAlias(keyStoreEntryAlias)) {
             throw IllegalArgumentException("Keystore does not contain entry with alias $keyStoreEntryAlias")
         }
@@ -221,8 +210,6 @@ object ApkSigner {
 
     class Signer internal constructor(private val signerBuilder: com.android.apksig.ApkSigner.Builder) {
         fun signApk(inputApkFile: File, outputApkFile: File) {
-            logger.info("Signing APK")
-
             signerBuilder.setInputApk(inputApkFile)?.setOutputApk(outputApkFile)?.build()?.sign()
         }
     }
