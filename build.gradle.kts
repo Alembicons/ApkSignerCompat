@@ -18,6 +18,11 @@ android {
         minSdk = 21
     }
 
+    buildTypes {
+        release {
+
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -33,18 +38,22 @@ dependencies {
     implementation(libs.core.ktx)
 }
 
-publishing {
-    publications.all {
-        if (this !is MavenPublication) return@all
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
 
-        groupId = "dev.Adevium"
-        artifactId = "ApkSignerCompat"
-        version = "1.0.1"
+                groupId = "dev.Adevium"
+                artifactId = "ApkSignerCompat"
+                version = "1.0.2"
 
-        pom {
-            name = "ApkSignerCompat"
-            description = "Apk Signer with Android compatibility"
-            url = "https://github.com/Adevium/ApkSignerCompat"
+                pom {
+                    name = "ApkSignerCompat"
+                    description = "Apk Signer with Android compatibility"
+                    url = "https://github.com/Adevium/ApkSignerCompat"
+                }
+            }
         }
     }
 }
