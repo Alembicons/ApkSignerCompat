@@ -1,5 +1,5 @@
 [versions]
-android = "8.5.2"
+android = "8.7.3"
 apksig = "4.4.0"
 bcpkix-jdk18on = "1.77"
 kotlin = "2.0.21"

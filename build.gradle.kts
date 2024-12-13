@@ -4,8 +4,6 @@ plugins {
     `maven-publish`
 }
 
-group = "dev.Adevium"
-
 repositories {
     mavenCentral()
     mavenLocal()
@@ -41,7 +39,7 @@ publishing {
 
         groupId = "dev.Adevium"
         artifactId = "ApkSignerCompat"
-        version = "1.0.0"
+        version = "1.0.1"
 
         pom {
             name = "ApkSignerCompat"
