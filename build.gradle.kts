@@ -15,13 +15,9 @@ repositories {
 
 android {
     namespace = "dev.Adevium.ApkSignerCompat"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         minSdk = 21
-    }
-
-    buildFeatures {
-        aidl = true
     }
 
     compileOptions {
@@ -42,6 +38,10 @@ dependencies {
 publishing {
     publications.all {
         if (this !is MavenPublication) return@all
+
+        groupId = "dev.Adevium"
+        artifactId = "ApkSignerCompat"
+        version = "1.0.0"
 
         pom {
             name = "ApkSignerCompat"
