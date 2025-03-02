@@ -12,7 +12,7 @@ repositories {
 }
 
 android {
-    namespace = "dev.Adevium.ApkSignerCompat"
+    namespace = "dev.AlembiconsProject.ApkSignerCompat"
     compileSdk = 35
     defaultConfig {
         minSdk = 21
@@ -44,14 +44,14 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
 
-                groupId = "dev.Adevium"
+                groupId = "dev.AlembiconsProject"
                 artifactId = "ApkSignerCompat"
-                version = "1.0.2"
+                version = "1.0.3"
 
                 pom {
                     name = "ApkSignerCompat"
                     description = "Apk Signer with Android compatibility"
-                    url = "https://github.com/Adevium/ApkSignerCompat"
+                    url = "https://github.com/Alembicons/ApkSignerCompat"
                 }
             }
         }
